@@ -3,6 +3,8 @@
 
 # licensr
 
+[![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+
 The goal of licensr is to give you a list of all the licenses used by
 packages to which your project links.
 
