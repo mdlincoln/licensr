@@ -23,6 +23,9 @@ package_licenses <- function(pkglist) {
 }
 
 # Find all packages in use within a given project
+# TODO Using a non-exported function from packrat is gross, but they've solved
+# the problem nicely already. I'm looking for a more minimalist extant
+# solution...
 project_packages <- function(dir = ".") {
   packrat:::appDependencies(project = dir, implicit.packrat.dependency = FALSE)
 }
