@@ -1,9 +1,13 @@
 get_desc_path <- function(pkg) {
-  paste0(find.package(pkg), "/DESCRIPTION")
+  pkg_path <- try(find.package(pkg), silent = TRUE)
+  if (inherits(pkg_path, "try-error")) return(NA_character_)
+  paste0(pkg_path, "/DESCRIPTION")
 }
 
 get_license <- function(pkg) {
-  read.dcf(get_desc_path(pkg), fields = "License")[1,1]
+  license_txt <- try(read.dcf(get_desc_path(pkg), fields = "License")[1,1], silent = TRUE)
+  if (inherits(license_txt, "try-error")) return(NA_character_)
+  license_txt
 }
 
 #' Find licenses for specified packages
