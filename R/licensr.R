@@ -16,12 +16,14 @@ get_license <- function(pkg) {
 package_licenses <- function(pkglist) {
   stopifnot(is.character(pkglist))
   license_vector <- vapply(pkglist, function(x) get_license(x), FUN.VALUE = character(1))
-  df <- data.frame(license = license_vector, stringsAsFactors = FALSE)
+  df <- tibble::tibble(
+    package = pkglist,
+    license = license_vector)
   df[order(df[["license"]]),]
 }
 
-#' Find all packages in use within a given project
-project_packages <- function(dir = ".", glob = "*.R*") {
+# Find all packages in use within a given project
+project_packages <- function(dir = ".") {
   packrat:::appDependencies(project = dir, implicit.packrat.dependency = FALSE)
 }
 
@@ -29,7 +31,7 @@ project_packages <- function(dir = ".", glob = "*.R*") {
 #'
 #' @param dir Project directory. Defaults to current working directory.
 #'
-#' @value A data frame with package names and package licenses
+#' @return A data frame with package names and package licenses
 #'
 #' @export
 project_licenses <- function(dir = ".") {

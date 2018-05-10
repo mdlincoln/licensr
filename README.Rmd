@@ -1,0 +1,33 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "README-"
+)
+```
+
+# licensr
+
+The goal of licensr is to give you a list of all the licenses used by packages to which your project links.
+
+## Installation
+
+You can install licensr from github with:
+
+```{r gh-installation, eval = FALSE}
+# install.packages("devtools")
+devtools::install_github("mdlincoln/licensr")
+```
+
+## Example
+
+```{r example}
+library(licensr)
+project_licenses()
+```
