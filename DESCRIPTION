@@ -7,6 +7,8 @@ Description: Collects text from the 'License' fields of all R packages
     referenced in a project. Useful for evaluating the compatibility of your 
     own project license.
 License: MIT + file LICENSE
+Imports: 
+    packrat
 Suggests: 
     testthat
 ByteCompile: true

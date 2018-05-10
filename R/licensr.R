@@ -1,9 +1,9 @@
-package_desc_path <- function(pkg) {
+get_desc_path <- function(pkg) {
   paste0(find.package(pkg), "/DESCRIPTION")
 }
 
-package_license <- function(pkg) {
-  read.dcf(package_desc_path(pkg), fields = "License")[1,1]
+get_license <- function(pkg) {
+  read.dcf(get_desc_path(pkg), fields = "License")[1,1]
 }
 
 #' Find licenses for specified packages
@@ -15,6 +15,23 @@ package_license <- function(pkg) {
 #' @export
 package_licenses <- function(pkglist) {
   stopifnot(is.character(pkglist))
-  license_vector <- vapply(pkglist, function(x) package_license(x), FUN.VALUE = character(1))
-  data.frame(license = license_vector, stringsAsFactors = FALSE)
+  license_vector <- vapply(pkglist, function(x) get_license(x), FUN.VALUE = character(1))
+  df <- data.frame(license = license_vector, stringsAsFactors = FALSE)
+  df[order(df[["license"]]),]
+}
+
+#' Find all packages in use within a given project
+project_packages <- function(dir = ".", glob = "*.R*") {
+  packrat:::appDependencies(project = dir, implicit.packrat.dependency = FALSE)
+}
+
+#' Find licenses for all packages in a project directory
+#'
+#' @param dir Project directory. Defaults to current working directory.
+#'
+#' @value A data frame with package names and package licenses
+#'
+#' @export
+project_licenses <- function(dir = ".") {
+  package_licenses(project_packages(dir))
 }
