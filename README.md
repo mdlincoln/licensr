@@ -4,6 +4,10 @@
 # licensr
 
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![Travis-CI Build
+Status](https://travis-ci.org/mdlincoln/licensr.svg?branch=master)](https://travis-ci.org/mdlincoln/licensr)
+[![AppVeyor Build
+Status](https://ci.appveyor.com/api/projects/status/github/mdlincoln/licensr?branch=master&svg=true)](https://ci.appveyor.com/project/mdlincoln/licensr)
 
 The goal of licensr is to give you a list of all the licenses used by
 packages to which your project links.
