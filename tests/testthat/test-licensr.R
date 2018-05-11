@@ -19,3 +19,10 @@ test_that("Locate license for multiple packages", {
   expect_equivalent(unsort_ts[["package"]], pkgs)
   expect_equivalent(unsort_ts[["license"]], c("MIT + file LICENSE", "GPL-3"))
 })
+
+test_that("Warnings and NAs for missing packages", {
+  pkgs <- c("testthat", "notapackage")
+  expect_warning(ts <- package_licenses(pkgs, sort = FALSE), fixed = "notapackage", all = TRUE)
+  expect_equivalent(ts[[2, "package"]], "notapackage")
+  expect_equivalent(ts[[2, "license"]], NA_character_)
+})

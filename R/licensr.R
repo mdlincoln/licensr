@@ -1,12 +1,23 @@
 get_desc_path <- function(pkg) {
   pkg_path <- try(find.package(pkg), silent = TRUE)
-  if (inherits(pkg_path, "try-error")) return(NA_character_)
+  # If a package name is sent but not installed, send warning and return NA
+  if (inherits(pkg_path, "try-error")) {
+    warning("Package ", pkg, " cannot be found.")
+    return(NA_character_)
+  }
   paste0(pkg_path, "/DESCRIPTION")
 }
 
 get_license <- function(pkg) {
-  license_txt <- try(read.dcf(get_desc_path(pkg), fields = "License")[1,1], silent = TRUE)
-  if (inherits(license_txt, "try-error")) return(NA_character_)
+  pkg_path <- get_desc_path(pkg)
+  license_txt <- try(suppressWarnings({
+    read.dcf(pkg_path, fields = "License")[1,1]
+  }), silent = TRUE)
+  # If license is unreadable or not available, send warning and return NA
+  if (inherits(license_txt, "try-error")) {
+    warning("License field for ", pkg, " could not be read.")
+    return(NA_character_)
+  }
   license_txt
 }
 
