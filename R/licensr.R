@@ -13,17 +13,20 @@ get_license <- function(pkg) {
 #' Find licenses for specified packages
 #'
 #' @param pkglist Character. Package names.
+#' @param sort Boolean. Return results sorted by license type? If `FALSE`
+#'   returns in the order of packages listed in `pkglist`
 #'
 #' @return A data frame with package names and package licenses
 #'
 #' @export
-package_licenses <- function(pkglist) {
+package_licenses <- function(pkglist, sort = TRUE) {
   stopifnot(is.character(pkglist))
   license_vector <- vapply(pkglist, function(x) get_license(x), FUN.VALUE = character(1))
   df <- tibble::tibble(
     package = pkglist,
     license = license_vector)
-  df[order(df[["license"]]),]
+  if (sort) return(df[order(df[["license"]]),])
+  df
 }
 
 # Find all packages in use within a given project

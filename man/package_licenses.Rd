@@ -4,10 +4,13 @@
 \alias{package_licenses}
 \title{Find licenses for specified packages}
 \usage{
-package_licenses(pkglist)
+package_licenses(pkglist, sort = TRUE)
 }
 \arguments{
 \item{pkglist}{Character. Package names.}
+
+\item{sort}{Boolean. Return results sorted by license type? If \code{FALSE}
+returns in the order of packages listed in \code{pkglist}}
 }
 \value{
 A data frame with package names and package licenses
