@@ -33,3 +33,11 @@ test_that("Project packages functions for a package", {
   expect_equivalent(sort(project_packages(test_package_path)), sort(expected_pkgs))
   expect_equivalent(sort(project_licenses(test_package_path)$package), sort(expected_pkgs))
 })
+
+test_that("Project packages functions for a project", {
+  expected_pkgs <- c("assertthat")
+  test_project_path <- system.file("tprj", package = "licensr", mustWork = TRUE)
+  expect_equivalent(sort(project_packages(test_project_path)), sort(expected_pkgs))
+  expect_equivalent(sort(project_licenses(test_project_path)$package), sort(expected_pkgs))
+})
+
