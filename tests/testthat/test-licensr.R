@@ -26,3 +26,10 @@ test_that("Warnings and NAs for missing packages", {
   expect_equivalent(ts[[2, "package"]], "notapackage")
   expect_equivalent(ts[[2, "license"]], NA_character_)
 })
+
+test_that("Project packages functions for a package", {
+  expected_pkgs <- c("assertthat", "cli", "crayon", "fansi", "pillar", "rlang", "tibble", "utf8")
+  test_package_path <- system.file("tpkg", package = "licensr", mustWork = TRUE)
+  expect_equivalent(sort(project_packages(test_package_path)), sort(expected_pkgs))
+  expect_equivalent(sort(project_licenses(test_package_path)$package), sort(expected_pkgs))
+})
