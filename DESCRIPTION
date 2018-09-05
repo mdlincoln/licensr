@@ -9,11 +9,12 @@ Description: Collects text from the 'License' fields of all R packages
 License: MIT + file LICENSE
 URL: https://github.com/mdlincoln/licensr
 BugReports: https://github.com/mdlincoln/licensr/issues
-Imports: 
+Imports:
     packrat,
     tibble
-Suggests: 
-    testthat
+Suggests:
+    testthat,
+    covr
 ByteCompile: true
 Encoding: UTF-8
 LazyData: true
